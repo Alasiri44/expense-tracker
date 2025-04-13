@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 
-function Expense({expense, description, category, amount, date}) {
+
+function Expense({user}) {
+    console.log(user);
+    
     return (
         <tr>
-            <td>{expense}</td>
-            <td>{description} </td>
-            <td>{category} </td>
-            <td>{amount} </td>
-            <td>{date} </td>
+            <td>{user.expense}</td>
+            <td>{user.description} </td>
+            <td>{user.category} </td>
+            <td>{user.amount} </td>
+            <td>{user.date} </td>
         </tr>
     );
 }
