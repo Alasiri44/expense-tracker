@@ -4,7 +4,7 @@ import SearchBar from "./Searchbar";
 
 function Table({newObj, handleFilterFunction}){
     return (
-        <div>
+        <div id="table-id">
             <SearchBar handleFilterFunction={handleFilterFunction}/>
             <table className="expense-table">
                 <thead>

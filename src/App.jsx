@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Header from './assets/Header'
 import AddExpense from './assets/addExpense'
 import Table from './assets/Table'
@@ -30,49 +30,51 @@ function App() {
 
     const existingObjects = [...myExpenses, myObject];
     itemsObjectArray = [...itemsObjectArray, existingObjects]
-    setMyExpenses(myExpenses => existingObjects);    
-            
+    setMyExpenses(myExpenses => existingObjects);
+
   }
-  
-  function handleFilter(event){
+
+  function handleFilter(event) {
     event.preventDefault();
 
     const filter = event.target.value
-      
+
     setSearchItem(filter);
 
-    const filteredExpenses = myExpenses.filter((myExpense) => {  
-              
-        if(myExpense.expense.toLowerCase().includes(filter.toLowerCase()) ||
-        myExpense.description.toLowerCase().includes(filter.toLowerCase())){
-          return true;
-        }else if(filter.length === 0){
-          return true;
-        }
+    const filteredExpenses = myExpenses.filter((myExpense) => {
+
+      if (myExpense.expense.toLowerCase().includes(filter.toLowerCase()) ||
+        myExpense.description.toLowerCase().includes(filter.toLowerCase())) {
+        return true;
+      } else if (filter.length === 0) {
+        return true;
+      }
     })
-    
+
     setSearchItem(searchItem => filteredExpenses)
-    
+
   }
 
 
-let items;
-  if(searchItem === ''){
+  let items;
+  if (searchItem === '') {
     items = myExpenses.filter((myExpense) => {
       return true;
     })
-  }else{
+  } else {
     items = [...searchItem];
   }
-  
+
 
   return (
     <>
-      <div>
-       
-          <Header />
+      <div className='app'>
+
+        <Header />
+        <div id='content-container'>
           <AddExpense handleSubmitFunction={handleSubmit} />
-          <Table newObj={items} handleFilterFunction={handleFilter} />       
+          <Table newObj={items} handleFilterFunction={handleFilter} />
+        </div>
       </div>
     </>
   )
