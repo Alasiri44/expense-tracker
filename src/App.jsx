@@ -5,8 +5,11 @@ import Table from './assets/Table'
 import './App.css'
 
 function App() {
-  let expenseObject = {};
-  const [myExpenses, setMyExpenses] = useState(null);
+  let itemsObjectArray = [];
+  let expenseObject = [];
+  const [searchItem, setSearchItem] = useState('');
+  const [myExpenses, setMyExpenses] = useState(expenseObject);
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -17,7 +20,7 @@ function App() {
     const amount = formData.get('amount');
     const date = formData.get('date');
 
-    expenseObject = {
+    const myObject = {
       'expense': expense,
       'description': description,
       'category': category,
@@ -25,10 +28,43 @@ function App() {
       'date': date
     }
 
-    setMyExpenses(myExpenses => expenseObject);    
+    const existingObjects = [...myExpenses, myObject];
+    itemsObjectArray = [...itemsObjectArray, existingObjects]
+    setMyExpenses(myExpenses => existingObjects);    
+            
+  }
+  
+  function handleFilter(event){
+    event.preventDefault();
+
+    const filter = event.target.value
+      
+    setSearchItem(filter);
+
+    const filteredExpenses = myExpenses.filter((myExpense) => {  
+              
+        if(myExpense.expense.toLowerCase().includes(filter.toLowerCase()) ||
+        myExpense.description.toLowerCase().includes(filter.toLowerCase())){
+          return true;
+        }else if(filter.length === 0){
+          return true;
+        }
+    })
+    
+    setSearchItem(searchItem => filteredExpenses)
     
   }
- 
+
+
+let items;
+  if(searchItem === ''){
+    items = myExpenses.filter((myExpense) => {
+      return true;
+    })
+  }else{
+    items = [...searchItem];
+  }
+  
 
   return (
     <>
@@ -36,10 +72,10 @@ function App() {
        
           <Header />
           <AddExpense handleSubmitFunction={handleSubmit} />
-          <Table newObj={myExpenses} />       
+          <Table newObj={items} handleFilterFunction={handleFilter} />       
       </div>
     </>
   )
 }
 
-export default App
+export default App;

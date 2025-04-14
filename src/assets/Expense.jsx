@@ -2,8 +2,7 @@ import React, { useContext } from "react";
 
 
 function Expense({user}) {
-    console.log(user);
-    
+        
     return (
         <tr>
             <td>{user.expense}</td>

@@ -5,7 +5,9 @@ function ExpenseList({ newObj }) {
     if (newObj) {
         return (
             <tbody>
-                {< Expense user={newObj} />}
+                {newObj.map((myObj, index) => {
+                    return < Expense key={index} user={myObj} />
+                })}                
             </tbody>
         );
     }
