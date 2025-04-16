@@ -2,10 +2,11 @@ import React from "react";
 import ExpenseList from "./ExpenseList";
 import SearchBar from "./Searchbar";
 
-function Table({newObj, handleFilterFunction}){
+// Renders the main table component including the search bar and the expense table
+function Table({ newObj, handleFilterFunction }) {
     return (
         <div id="table-id">
-            <SearchBar handleFilterFunction={handleFilterFunction}/>
+            <SearchBar handleFilterFunction={handleFilterFunction} />
             <table className="expense-table">
                 <thead>
                     <tr className="header-row">
